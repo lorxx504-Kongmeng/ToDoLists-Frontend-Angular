@@ -21,7 +21,7 @@ export class AccountService {
         console.log("successful")
         this.$create.next(false);
       }, error: err => {
-        if (err.status === 400) {
+        if (err.status === 404) {
           this.$error.next(enumError.EMPTY_ERROR);
           return;
         }
@@ -42,7 +42,7 @@ export class AccountService {
           this.$error.next(enumError.LOGIN_EMPTY_ERROR);
           return;
         }
-        if (err.status === 500) {
+        if (err.status === 404) {
           this.$error.next(enumError.LOGIN_ACCOUNT_ERROR);
           return;
         }

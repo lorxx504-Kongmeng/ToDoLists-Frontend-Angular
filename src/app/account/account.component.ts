@@ -13,9 +13,13 @@ export class AccountComponent implements OnDestroy{
     this.sub1 = this.accountService.$create.subscribe({
       next: value => {this.create = value}
     });
+    this.sub2 = this.accountService.$error.subscribe({
+      next: value => {this.error = value}
+    })
   }
   sub1: Subscription;
-
+  sub2: Subscription;
+  error: string = "";
   email: string = "";
   password: string = "";
   fName: string = "";
@@ -23,14 +27,35 @@ export class AccountComponent implements OnDestroy{
   bDate: number = -1;
   image: string = "";
   create: boolean = false;
+  birthday: string = "";
 
   onCreate() {
     this.accountService.$create.next(true);
+    this.clearString();
+  }
+  onCreateAccount() {
+    const day = new Date(this.birthday);
+    const result = day.getTime();
+    this.bDate = result;
+    const data: IAccount = {
+      fName: this.fName,
+      lName: this.lName,
+      email: this.email,
+      password: this.password,
+      bDate: this.bDate
+    }
+    this.accountService.create(data);
+    this.clearString();
+  }
+  onCancel() {
+    this.accountService.$create.next(false);
+    this.clearString();
   }
   onLogin() {
     this.accountService.login(this.email,this.password);
     this.clearString();
   }
+
   clearString() {
     this.email = "";
     this.password = "";
@@ -42,6 +67,7 @@ export class AccountComponent implements OnDestroy{
 
   ngOnDestroy() {
     this.sub1.unsubscribe();
+    this.sub2.unsubscribe();
   }
 
 }

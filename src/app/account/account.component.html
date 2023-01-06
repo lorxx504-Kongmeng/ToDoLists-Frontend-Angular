@@ -1,26 +1,21 @@
 
 <div class="d-flex justify-content-center flex-wrap" style="padding: 120px 0;" *ngIf="!create">
-  <div class="card flex-wrap" style="width: 35rem; height: 36rem">
+  <div class="card flex-wrap" style="width: 35rem;">
     <div class="card-header d-flex justify-content-center" >
-      <i class="bi bi-card-checklist"></i>
-      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
-        <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
-        <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
-      </svg>
-      <h2 class="m-1">To Do Lists App</h2>
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
+          <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
+          <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
+        </svg>
+        <h1 class="m-1">To Do Lists App</h1>
+      </div>
     </div>
     <div class="card-body d-flex justify-content-center">
       <div style="padding: 100px 0">
         <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Email</span>
-          </div>
           <input type="text" class="form-control" placeholder="Email" [(ngModel)]="email">
         </div>
         <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Password</span>
-          </div>
           <input type="text" class="form-control" placeholder="Password" [(ngModel)]="password">
         </div>
         <div class="d-flex justify-content-center m-5">
@@ -29,12 +24,14 @@
             <button type="button" class="btn btn-danger m-2" (click)="onCreate()">Create</button>
           </div>
         </div>
+        <div style="width: 20rem;">
+          <p class="m-1">{{error}}</p>
+        </div>
       </div>
     </div>
   </div>
 </div>
 <div *ngIf="create">
-
     <div class="d-flex justify-content-center" style="padding:100px 0;">
       <div class="card" style="width: 38rem;">
         <div class="card-header d-flex justify-content-between">
@@ -50,26 +47,37 @@
             <h5 class="m-3">To-Do-Lists App</h5>
           </div>
         </div>
-        <div class="card-body" style="width: 30rem">
-          <div class="input-group">
-            <input type="text" class="form-control m-1" placeholder="First name">
-            <input type="text" class="form-control m-1" placeholder="Last name">
-          </div>
-          <div class="input-group">
-            <input type="text" class="form-control m-1" placeholder="Email">
-          </div>
-          <div class="input-group">
-            <input type="text" class="form-control m-1" placeholder="Password" >
-          </div>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text m-1">Birthday</span>
-            </div>
-            <input type="date" class="form-control m-1" >
-          </div>
-
+        <div>
         </div>
-
+        <div class="card-body d-flex justify-content-center">
+          <div style="width: 28rem">
+            <div class="input-group">
+              <input type="text" class="form-control m-1" placeholder="First name" [(ngModel)]="fName">
+              <input type="text" class="form-control m-1" placeholder="Last name" [(ngModel)]="lName">
+            </div>
+            <div class="input-group">
+              <input type="text" class="form-control m-1" placeholder="Email" [(ngModel)]="email">
+            </div>
+            <div class="input-group">
+              <input type="text" class="form-control m-1" placeholder="Password" [(ngModel)]="password">
+            </div>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text m-1">Birthday</span>
+              </div>
+              <input type="date" class="form-control m-1" [(ngModel)]="birthday">
+            </div>
+            <div class="d-flex justify-content-center">
+              <p class="m-2">{{error}}</p>
+            </div>
+            <div class="d-flex justify-content-center m-5">
+              <div>
+                <button type="button" class="btn btn-primary m-1" (click)="onCreateAccount()">Create</button>
+                <button type="button" class="btn btn-danger m-1" (click)="onCancel()">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

@@ -7,6 +7,5 @@ export interface IAccount {
   email: string;
   password: string;
   bDate: number;
-  image: string;
 
 }
