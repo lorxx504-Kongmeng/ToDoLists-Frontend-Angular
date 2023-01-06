@@ -20,8 +20,9 @@ export class AccountService {
       next: value => {
         console.log("successful")
         this.$create.next(false);
+        this.$error.next("");
       }, error: err => {
-        if (err.status === 404) {
+        if (err.status === 400) {
           this.$error.next(enumError.EMPTY_ERROR);
           return;
         }
@@ -37,6 +38,7 @@ export class AccountService {
       next: value => {
         this.$current_Account.next(value);
         this.$login.next(true);
+        this.$error.next("");
       }, error: err => {
         if (err.status === 400) {
           this.$error.next(enumError.LOGIN_EMPTY_ERROR);

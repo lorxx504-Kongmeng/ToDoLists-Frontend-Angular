@@ -63,6 +63,7 @@ export class AccountComponent implements OnDestroy{
     this.lName = "";
     this.bDate = -1;
     this.image = "";
+    this.accountService.$error.next("");
   }
 
   ngOnDestroy() {
