@@ -36,6 +36,7 @@ export class AccountService {
   public login(email: string, password: string) {
     this.httpService.login(email, password).pipe(first()).subscribe({
       next: value => {
+        console.log(value)
         this.$current_Account.next(value);
         this.$login.next(true);
         this.$error.next("");
