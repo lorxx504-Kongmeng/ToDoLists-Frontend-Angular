@@ -9,13 +9,13 @@
         <a class="navbar-brand col-lg-3 me-0 m-3" href=""><i>To Do Lists App</i></a>
       </div>
       <div class="d-flex">
-        <div class=" card m-1" style="height: 3rem">
+        <div class="m-1" style="height: 2rem">
           <button class="btn btn-light">
             <div class="d-flex">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                 <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
               </svg>
-              <h5 class="m-1"> Kongmeng</h5>
+              <h6 class="m-1"> Kongmeng</h6>
             </div>
           </button>
         </div>
@@ -58,11 +58,18 @@
     <div class="d-flex justify-content-between">
       <div class="m-4">
         <h5>Date</h5>
-        <h2>Title</h2>
-        <button class="btn btn-light" style="width: 40rem">+ Add task</button>
+        <h2>Welcome Kongmeng</h2>
+        <div>
+          <button class="btn btn-primary" style="width: 55rem" (click)="openDialog()">+ Add task</button>
+        </div>
+
       </div>
     </div>
   </div>
-
-
+  <div >
+    <div style="width: 20rem">
+        <h5 style="text-align: center" class="m-4">Lists</h5>
+    </div>
+  </div>
 </div>
+

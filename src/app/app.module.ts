@@ -7,18 +7,23 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import { MainComponent } from './main/main.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material/dialog';
+import { AddComponent } from './add/add.component'
 @NgModule({
   declarations: [
     AppComponent,
     AccountComponent,
-    MainComponent
+    MainComponent,
+    AddComponent
   ],
     imports: [
         BrowserModule,
         NgbModule,
         HttpClientModule,
-        FormsModule
+        FormsModule,
+        BrowserAnimationsModule,
+        MatDialogModule
     ],
   providers: [],
   bootstrap: [AppComponent]
