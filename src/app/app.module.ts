@@ -9,13 +9,15 @@ import {FormsModule} from "@angular/forms";
 import { MainComponent } from './main/main.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
-import { AddComponent } from './add/add.component'
+import { AddComponent } from './add/add.component';
+import { ViewComponent } from './view/view.component'
 @NgModule({
   declarations: [
     AppComponent,
     AccountComponent,
     MainComponent,
-    AddComponent
+    AddComponent,
+    ViewComponent
   ],
     imports: [
         BrowserModule,

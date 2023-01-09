@@ -54,18 +54,29 @@
       </li>
     </div>
   </div>
+
   <div>
     <div class="d-flex justify-content-between">
       <div class="m-4">
-        <h5>Date</h5>
-        <h2>Welcome Kongmeng</h2>
+        <h2>{{date | date:'short'}}</h2>
+        <h1>Welcome {{current_Account.fName}} {{current_Account.lName}}</h1>
         <div>
           <button class="btn btn-primary" style="width: 55rem" (click)="openDialog()">+ Add task</button>
         </div>
 
+        <div class="card mt-2">
+          <div *ngFor="let element of tasks; let i = index" >
+            <a (click)="moreDetail(i)"> <h1 class="m-2">{{i+1}}. {{element.title}}</h1></a>
+          </div>
+        </div>
+
+
       </div>
     </div>
   </div>
+
+
+
   <div >
     <div style="width: 20rem">
         <h5 style="text-align: center" class="m-4">Lists</h5>
