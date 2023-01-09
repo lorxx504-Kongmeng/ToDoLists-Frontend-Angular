@@ -10,6 +10,7 @@ import {Subscription} from "rxjs";
 import {ICurrentAccount} from "../interfaces/ICurrentAccount";
 import {ViewComponent} from "../view/view.component";
 import {IAddSocialMedia} from "../interfaces/IAddSocialMedia";
+import {IDisplayTasks} from "../interfaces/IDisplayTasks";
 
 @Component({
   selector: 'app-main',
@@ -30,6 +31,16 @@ export class MainComponent implements OnDestroy{
           if(value != null) {
             this.tasks = value
           }
+          for (let i = 0; i < this.tasks.length; i++) {
+            const date_convert = new Date(this.tasks[i].date);
+            const data: IDisplayTasks = {
+              id: this.tasks[i].id,
+              title: this.tasks[i].title,
+              description: this.tasks[i].description,
+              date: date_convert
+            }
+            this.displayTasks.push(data);
+          }
         }, error: err =>  {console.log(err)}});
       this.sub2 = this.accountService.$current_Account.subscribe({
         next: value => {
@@ -37,15 +48,18 @@ export class MainComponent implements OnDestroy{
             this.current_Account = value;
           }
         }
-      })
+      });
+
 
       setInterval(() => {
         this.date = new Date()
       }, 1000)
   }
+
   sub1: Subscription;
   sub2: Subscription;
   tasks: IAddTask[] = [];
+  displayTasks: IDisplayTasks[] = [];
   current_Account: ICurrentAccount = {
     id: -1,
     fName: "",

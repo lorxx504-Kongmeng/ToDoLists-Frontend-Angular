@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AddComponent } from './add/add.component';
 import { ViewComponent } from './view/view.component'
+import {CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport} from "@angular/cdk/scrolling";
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,14 +20,17 @@ import { ViewComponent } from './view/view.component'
     AddComponent,
     ViewComponent
   ],
-    imports: [
-        BrowserModule,
-        NgbModule,
-        HttpClientModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        MatDialogModule
-    ],
+  imports: [
+    BrowserModule,
+    NgbModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    CdkVirtualScrollViewport,
+    CdkFixedSizeVirtualScroll,
+    CdkVirtualForOf
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

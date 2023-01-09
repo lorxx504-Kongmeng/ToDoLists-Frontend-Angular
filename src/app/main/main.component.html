@@ -29,7 +29,7 @@
   <div class="d-flex">
     <div class="nav nav-pills nav-flush flex-column mb-auto text-center m-2" >
       <li class="nav-item">
-        <button class="btn btn-light m-2" style="width: 40rem">
+        <button class="btn btn-light m-2" style="width: 50rem">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-day" viewBox="0 0 16 16">
             <path d="M4.684 11.523v-2.3h2.261v-.61H4.684V6.801h2.464v-.61H4v5.332h.684zm3.296 0h.676V8.98c0-.554.227-1.007.953-1.007.125 0 .258.004.329.015v-.613a1.806 1.806 0 0 0-.254-.02c-.582 0-.891.32-1.012.567h-.02v-.504H7.98v4.105zm2.805-5.093c0 .238.192.425.43.425a.428.428 0 1 0 0-.855.426.426 0 0 0-.43.43zm.094 5.093h.672V7.418h-.672v4.105z"/>
             <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
@@ -37,7 +37,7 @@
           Today</button>
       </li>
       <li class="nav-item">
-        <button class="btn btn-light m-2" style="width: 40rem">
+        <button class="btn btn-light m-2" style="width: 50rem">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-week" viewBox="0 0 16 16">
             <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
             <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
@@ -45,7 +45,7 @@
           Upcoming</button>
       </li>
       <li class="nav-item">
-        <button class="btn btn-light m-2" style="width: 40rem">
+        <button class="btn btn-light m-2" style="width: 50rem">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
             <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
             <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5v2z"/>
@@ -61,14 +61,26 @@
         <h2>{{date | date:'short'}}</h2>
         <h1>Welcome {{current_Account.fName}} {{current_Account.lName}}</h1>
         <div>
-          <button class="btn btn-primary" style="width: 55rem" (click)="openDialog()">+ Add task</button>
+          <button class="btn btn-primary" style="width: 64rem" (click)="openDialog()">+ Add task</button>
         </div>
 
-        <div class="card mt-2">
-          <div *ngFor="let element of tasks; let i = index" >
-            <a (click)="moreDetail(i)"> <h1 class="m-2">{{i+1}}. {{element.title}}</h1></a>
-          </div>
-        </div>
+<!--        <div class="card mt-2">-->
+
+          <cdk-virtual-scroll-viewport itemSize="1" style="height: 50rem; width: 64rem" class="card mt-4">
+            <div *cdkVirtualFor="let element of displayTasks; let i = index" class="d-inline-block" >
+              <div class="d-flex flex-column">
+                <div class="card m-2" style="width: 14rem;">
+                  <a class="card  text-decoration-none" style="color: black" (click)="moreDetail(i)">
+                    <h4 class="m-2">{{element.date | date: 'shortDate'}}</h4>
+                    <h2 class="m-2">{{element.title}}</h2>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </cdk-virtual-scroll-viewport>
+
+
+<!--        </div>-->
 
 
       </div>
@@ -77,10 +89,21 @@
 
 
 
-  <div >
-    <div style="width: 20rem">
-        <h5 style="text-align: center" class="m-4">Lists</h5>
-    </div>
-  </div>
-</div>
 
+<!--<cdk-virtual-scroll-viewport itemSize="100" style="height: 100vh; width: 80vw">-->
+<!--  <div *cdkVirtualFor="let e of displayTasks">-->
+<!--  </div>-->
+<!--</cdk-virtual-scroll-viewport>-->
+
+
+
+
+<!--<cdk-virtual-scroll-viewport itemSize="50">-->
+<!--&lt;!&ndash;  <div *ngFor="let element of displayTasks">&ndash;&gt;-->
+<!--&lt;!&ndash;    <h2>{{element.title}}</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+
+<!--  <div *cdkVirtualFor="let element of displayTasks">-->
+<!--    <h2>{{element.title}}</h2>-->
+<!--  </div>-->
+<!--</cdk-virtual-scroll-viewport>-->
