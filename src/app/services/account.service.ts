@@ -6,6 +6,7 @@ import {ICurrentAccount} from "../interfaces/ICurrentAccount";
 import {enumError} from "../enums/EnumError";
 import {IAddTask} from "../interfaces/IAddTask";
 import {IAddSocialMedia} from "../interfaces/IAddSocialMedia";
+import {IDisplayTasks} from "../interfaces/IDisplayTasks";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class AccountService {
   $tasks = new BehaviorSubject<IAddTask[] | null>(null);
   $socialMedia = new BehaviorSubject<IAddSocialMedia[] | null>( null);
   $current_Id = new BehaviorSubject<number>(-1);
+  $display_Tasks = new BehaviorSubject<IDisplayTasks[] | null>(null);
 
   public create(data: IAccount) {
     this.httpService.create(data).pipe(first()).subscribe({
@@ -44,6 +46,7 @@ export class AccountService {
         this.$current_Account.next(value);
         this.$current_Id.next(value.id);
         this.$tasks.next(value.toDoLists)
+        this.getDisplayTasks();
         this.$login.next(true);
         this.$error.next("");
       }, error: err => {
@@ -58,10 +61,33 @@ export class AccountService {
       }
     })
   }
-
+  public getDisplayTasks() {
+    let temp: IAddTask[] = [];
+    this.$tasks.subscribe({
+      next: value => {
+        if (value!=null)
+        temp = value;
+      }
+    });
+    let stuff: IDisplayTasks[] = [];
+    for (let i = 0; i < temp.length; i++) {
+      const date_convert = new Date(temp[i].date);
+      const data: IDisplayTasks = {
+        id: temp[i].id,
+        title: temp[i].title,
+        description: temp[i].description,
+        date: date_convert
+      }
+      stuff.push(data);
+    }
+    this.$display_Tasks.next(stuff);
+  }
   public addTask(data: IAddTask) {
     this.httpService.addTask(data).pipe(first()).subscribe({
-      next: value => {this.$tasks.next(value)}, error: err => {console.log(err)}
+      next: value => {
+        this.$tasks.next(value)
+        this.getDisplayTasks();
+      }, error: err => {console.log(err)}
     });
   }
   public addSocialMedia(data: IAddSocialMedia) {

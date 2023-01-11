@@ -1,15 +1,11 @@
 import {Component, Inject, OnDestroy} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
-import {PopupService} from "@ng-bootstrap/ng-bootstrap/util/popup";
-import {main} from "@popperjs/core";
-import {AccountComponent} from "../account/account.component";
 import {AddComponent} from "../add/add.component";
 import {AccountService} from "../services/account.service";
 import {IAddTask} from "../interfaces/IAddTask";
 import {Subscription} from "rxjs";
 import {ICurrentAccount} from "../interfaces/ICurrentAccount";
 import {ViewComponent} from "../view/view.component";
-import {IAddSocialMedia} from "../interfaces/IAddSocialMedia";
 import {IDisplayTasks} from "../interfaces/IDisplayTasks";
 
 @Component({
@@ -31,16 +27,6 @@ export class MainComponent implements OnDestroy{
           if(value != null) {
             this.tasks = value
           }
-          for (let i = 0; i < this.tasks.length; i++) {
-            const date_convert = new Date(this.tasks[i].date);
-            const data: IDisplayTasks = {
-              id: this.tasks[i].id,
-              title: this.tasks[i].title,
-              description: this.tasks[i].description,
-              date: date_convert
-            }
-            this.displayTasks.push(data);
-          }
         }, error: err =>  {console.log(err)}});
       this.sub2 = this.accountService.$current_Account.subscribe({
         next: value => {
@@ -49,8 +35,11 @@ export class MainComponent implements OnDestroy{
           }
         }
       });
-
-
+      this.sub3 = this.accountService.$display_Tasks.subscribe({
+        next: value => {
+          if (value!= null)
+          this.displayTasks = value}
+      });
       setInterval(() => {
         this.date = new Date()
       }, 1000)
@@ -58,6 +47,7 @@ export class MainComponent implements OnDestroy{
 
   sub1: Subscription;
   sub2: Subscription;
+  sub3: Subscription;
   tasks: IAddTask[] = [];
   displayTasks: IDisplayTasks[] = [];
   current_Account: ICurrentAccount = {
@@ -78,6 +68,8 @@ export class MainComponent implements OnDestroy{
   }
   ngOnDestroy() {
     this.sub1.unsubscribe();
+    this.sub2.unsubscribe();
+    this.sub3.unsubscribe();
   }
 
   moreDetail(i: number) {

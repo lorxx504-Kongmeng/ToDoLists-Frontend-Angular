@@ -1,3 +1,16 @@
-<p>view works!</p>
+<div style="width: 40rem">
+  <div class="m-2 d-flex justify-content-between" >
+    <h2>{{task.date | date: 'shortDate'}}</h2>
+    <button class="btn btn-danger" style="width: 2rem; height: 2rem">x</button>
+  </div>
 
-<h1>hi {{index}}</h1>
+  <hr>
+  <div>
+    <h1>{{task.title}}</h1>
+    <p>{{task.description}}</p>
+  </div>
+  <div>
+    <button class="btn btn-light">Delete</button>
+  </div>
+
+</div>
