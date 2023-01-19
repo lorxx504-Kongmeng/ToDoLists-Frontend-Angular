@@ -1,15 +1,17 @@
 <div style="width: 40rem">
   <div class="m-2 d-flex justify-content-between" >
     <h2>{{task.date | date: 'shortDate'}}</h2>
-    <button class="btn btn-danger" style="width: 2rem; height: 2rem">x</button>
   </div>
-
-  <hr>
-  <div>
-    <h1>{{task.title}}</h1>
-    <p>{{task.description}}</p>
+  <div class="m-2">
+    <h1>Task title: {{task.title}}</h1>
+    <div>
+      <h1>
+        Description:
+      </h1>
+      <p class="m-1">{{task.description}}</p>
+    </div>
   </div>
-  <div>
+  <div class="m-2">
     <button class="btn btn-light">Delete</button>
   </div>
 

@@ -12,13 +12,15 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { AddComponent } from './add/add.component';
 import { ViewComponent } from './view/view.component'
 import {CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport} from "@angular/cdk/scrolling";
+import { AccountSettingComponent } from './account-setting/account-setting.component';
 @NgModule({
   declarations: [
     AppComponent,
     AccountComponent,
     MainComponent,
     AddComponent,
-    ViewComponent
+    ViewComponent,
+    AccountSettingComponent
   ],
   imports: [
     BrowserModule,

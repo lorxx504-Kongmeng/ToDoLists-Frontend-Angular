@@ -21,8 +21,12 @@ export class HttpService {
   public addTask(data: IAddTask): Observable<IAddTask[]> {
     return this.httpClient.post("http://localhost:8008/api/account/addTask", data) as Observable<IAddTask[]>;
   }
+  public deleteTask(id: number): void {
+    this.httpClient.delete(`http://localhost:8008/api/tasks?id=${id}`);
+  }
   public addSocialMedia(data: IAddSocialMedia) : Observable<IAddSocialMedia[]> {
     return this.httpClient.post("http://localhost:8008/api/account/addSocialMedia", data) as Observable<IAddSocialMedia[]>;
   }
+
 
 }
